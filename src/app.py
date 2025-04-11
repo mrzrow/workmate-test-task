@@ -13,7 +13,7 @@ class App:
         for file in files:
             if not os.path.exists(file):
                 raise FileNotFoundError(f"file not found: {file}")
-        return files
+        return tuple(files)
 
     def get_report(self, args: Namespace) -> AbstractReport:
         avaliable_reports = {
