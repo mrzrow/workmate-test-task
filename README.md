@@ -35,5 +35,5 @@ Total requests: 60
 To create a new report type, you need to:
 
 + Create a class that implements the abstract class `AbstractReport` (`./src/reports/abstract_report.py`).
-+ Add the class to the `available_reports` variable in the format `"report_name": report_class` in the file `./src/reports/__init.py__`.
++ Add the class to the `available_reports` variable in the format `"report_name": report_class` in the file `./src/reports/__init__.py`.
 + For testing convenience, add the class to the `__all__` variable in the same `__init__.py` file.
