@@ -67,7 +67,7 @@ class HandlersReport(AbstractReport):
             print(f'{total[status]:<{statuses_len}}', end='')
         print(f'\n\nTotal requests: {sum(total.values())}\n')
 
-    def generate_report(self):
+    def generate_report(self) -> None:
         with multiprocessing.Pool(processes=os.cpu_count()) as pool:
             results = pool.map(self.parse_file, self.files)
 
