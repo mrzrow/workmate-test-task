@@ -5,6 +5,7 @@ from collections import defaultdict, Counter
 
 from src.reports.abstract_report import AbstractReport
 
+
 class HandlersReport(AbstractReport):
     def __init__(self, files: tuple[str, ...]):
         self.files = files
@@ -15,11 +16,10 @@ class HandlersReport(AbstractReport):
         for token in information.strip().split():
             if re.fullmatch(reg_expr, token):
                 return token
-        
+
         return None
 
-
-    def parse_file(self, filename: str) -> defaultdict[Counter, int]:
+    def parse_file(self, filename: str) -> defaultdict[str, Counter[str, int]]:
         result = defaultdict(Counter)
 
         with open(filename, 'r') as file:
@@ -32,17 +32,18 @@ class HandlersReport(AbstractReport):
                         result[endpoint][log_status] += 1
 
         return result
-    
-    def merge_results(self, results: list[defaultdict[Counter, int]]) -> defaultdict[Counter, int]:
+
+    def merge_results(self, results: list[defaultdict[str, Counter[str, int]]]
+                      ) -> defaultdict[str, Counter[str, int]]:
         merged = defaultdict(Counter)
 
         for result in results:
             for endpoint, counter in result.items():
                 merged[endpoint].update(counter)
-        
+
         return merged
 
-    def show_results(self, results: defaultdict[Counter, int]) -> None:
+    def show_results(self, results: defaultdict[str, Counter[str, int]]) -> None:
         header = 'HANDLERS'
         statuses = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
         handler_len = len(max(results.keys(), key=len)) + 2

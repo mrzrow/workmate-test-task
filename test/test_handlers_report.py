@@ -3,6 +3,7 @@ from collections import defaultdict, Counter
 
 from src.reports.handlers_report import HandlersReport
 
+
 @pytest.fixture
 def log_file():
     return './test/test1.log'
@@ -10,7 +11,7 @@ def log_file():
 
 @pytest.fixture
 def report(log_file):
-    return HandlersReport((log_file))
+    return HandlersReport((log_file,))
 
 
 def test_parse_endpoint(report):
@@ -50,7 +51,7 @@ def test_parse_file(report, log_file):
 
 def test_merge_results(report):
     result1 = defaultdict(
-        Counter, 
+        Counter,
         {
             '/api/v1/test/1/': Counter({
                 'INFO': 1,
@@ -75,7 +76,7 @@ def test_merge_results(report):
         }
     )
     merged = report.merge_results([result1, result2])
-    
+
     expected = defaultdict(
         Counter,
         {
