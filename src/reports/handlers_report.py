@@ -73,4 +73,3 @@ class HandlersReport(AbstractReport):
 
         merged = self.merge_results(results)
         self.show_results(merged)
-
