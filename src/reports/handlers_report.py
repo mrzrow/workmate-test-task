@@ -3,7 +3,7 @@ import os
 import multiprocessing
 from collections import defaultdict, Counter
 
-from src.reports.abstract_report import AbstractReport
+from src.reports import AbstractReport
 
 
 class HandlersReport(AbstractReport):

@@ -1,7 +1,7 @@
 import os
 from argparse import Namespace
 
-from src.reports import AbstractReport, HandlersReport
+from src.reports import AbstractReport, available_reports
 
 
 class App:
@@ -17,10 +17,6 @@ class App:
         return tuple(files)
 
     def get_report(self, args: Namespace) -> AbstractReport:
-        available_reports = {
-            'handlers': HandlersReport,
-        }
-
         report_type = args.report
         if report_type not in available_reports:
             raise ValueError(f'non-existent report type: {report_type}')
